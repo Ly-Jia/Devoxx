@@ -1,0 +1,23 @@
+{
+"slots":[
+	{"roomId":"a_hall","notAllocated":false,"fromTimeMillis":1415862000000,"break":{"id":"dej","nameEN":"Breakfast","nameFR":"Accueil et petit-déjeuner","room":{"id":"a_hall","name":"Exhibition floor","capacity":1500,"setup":"special"}},"roomSetup":"special","talk":null,"fromTime":"08:00","toTimeMillis":1415867400000,"toTime":"09:30","roomCapacity":1500,"roomName":"Exhibition floor","slotId":"dej_thursday_13_8h0_8h30","day":"Mercredi"},
+	{"roomId":"room8","notAllocated":true,"fromTimeMillis":1415867400000,"break":null,"roomSetup":"theatre", "talk": {
+                "talkType": "University",
+                "track": "Java SE, Java EE",
+                "summaryAsHtml": "Java 8 est la, on en parle au présent. La nouveauté majeure de Java 8 est bien sûr l'introduction des lambda expressions. Cette introduction n'aurait pas été utile si l'API Collection n'avait été revue. Cette révision s'appelle l'API Stream, qui, ajoutée à la notion de Collector, rend un peu vieillot notre bon vieux pattern Iterator. Cette université se propose de présenter les patterns construits sur les Streams, et de montrer sur de nombreux exemples, simples et complexes, les nouveaux patterns proposés par cette API. On parlera patterns, parallélisation, implémentation et performances.\n",
+                "id": "DNY-501",
+                "speakers": [
+                    {
+                        "link": {
+                            "href": "http://cfp.devoxx.fr/api/conferences/DevoxxFR2015/speakers/70365c89d2a734da0d24d091f7ec0af77ba90701",
+                            "rel": "http://cfp.devoxx.fr/api/profile/speaker",
+                            "title": "José Paumard"
+                        },
+                        "name": "José Paumard"
+                    }
+                ],
+                "title": "Java 8 Streams & Collectors : patterns, performances, parallélisation",
+                "lang": "fr",
+                "summary": "Java 8 est la, on en parle au présent. La nouveauté majeure de Java 8 est bien sûr l'introduction des lambda expressions. Cette introduction n'aurait pas été utile si l'API Collection n'avait été revue. Cette révision s'appelle l'API Stream, qui, ajoutée à la notion de Collector, rend un peu vieillot notre bon vieux pattern Iterator. Cette université se propose de présenter les patterns construits sur les Streams, et de montrer sur de nombreux exemples, simples et complexes, les nouveaux patterns proposés par cette API. On parlera patterns, parallélisation, implémentation et performances. "
+            },"fromTime":"09:30","toTimeMillis":1415871000000,"toTime":"10:30","roomCapacity":745,"roomName":"Room 8","slotId":"key_room8_thursday_13_9h30_10h30","day":"Mercredi"}
+]}
