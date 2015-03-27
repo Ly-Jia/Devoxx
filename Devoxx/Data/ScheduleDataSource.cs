@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Storage;
 using Devoxx.Model;
 
 namespace Devoxx.Data
@@ -26,25 +21,35 @@ namespace Devoxx.Data
             get { return this.schedules; }
         }
 
-        public static async Task<IEnumerable<Schedule>> GetGroupsAsync()
-        {
-            await _scheduleDataSource.GetScheduleDataAsync();
+        private ObservableCollection<Index> hoursCriteria = new ObservableCollection<Index>();
 
-            return _scheduleDataSource.Schedules;
+        public ObservableCollection<Index> HoursCriteria
+        {
+            get { return this.hoursCriteria; }
         }
 
-        public static async Task<Schedule> GetGroupAsync(string day)
+        public static async Task<Schedule> GetScheduleAsync(string day)
         {
             await _scheduleDataSource.GetScheduleDataAsync();
             // Simple linear search is acceptable for small data sets
-            var matches = _scheduleDataSource.Schedules.Where((schedule) => schedule.Day.Equals(day));
+            var matches = _scheduleDataSource.Schedules.Where(s => s.Day == day);
             if (matches.Count() == 1) return matches.First();
             return null;
         }
 
-        public static async Task<Slot> GetItemAsync(string uniqueId)
+        public static async Task<Index> GetHoursIndex(string day)
         {
-            await _scheduleDataSource.GetScheduleDataAsync();
+            if (!_scheduleDataSource.Schedules.Any())
+                await _scheduleDataSource.GetScheduleDataAsync();
+            var matches = _scheduleDataSource.HoursCriteria.Where(s => s.Key == day);
+            if (matches.Count() == 1) return matches.First();
+            return null;
+        }
+
+        public static async Task<Slot> GetSlotAsync(string uniqueId)
+        {
+            if (!_scheduleDataSource.Schedules.Any())
+                await _scheduleDataSource.GetScheduleDataAsync();
             // Simple linear search is acceptable for small data sets
             List<Slot> slots = _scheduleDataSource.Schedules.SelectMany(schedule => schedule.Slots).Distinct().ToList();
             var matches = slots.Where(slot => slot.Id == uniqueId).ToList();
@@ -71,7 +76,11 @@ namespace Devoxx.Data
                         var response = await client.GetAsync(path);
                         jsonText = await response.Content.ReadAsStringAsync();
                         var schedule = Utils.DeserializeSchedule(jsonText);
-                        await AddSchedule(schedule);
+                        schedules.Add(schedule);
+
+                        
+                        var item = Utils.CreateIndex(schedule, HourCriteria());
+                        hoursCriteria.Add(item);
                     }
                 }
 
@@ -83,9 +92,18 @@ namespace Devoxx.Data
             }
         }
 
-        private async Task AddSchedule(Schedule schedule)
+        private Func<Slot, string> HourCriteria()
         {
-            schedules.Add(schedule);
+            return s => s.FromTimeToTime;
+        }
+
+
+        public static IEnumerable<Slot> GetScheduleOfHourAsync(string day, string hour)
+        {
+            var schedule = _scheduleDataSource.Schedules.FirstOrDefault(s => s.Day == day);
+            var slots = schedule.Slots;
+            
+            return slots.Where(s => s.FromTimeToTime == hour);
         }
     }
 }

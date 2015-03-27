@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Devoxx.Model
 {
@@ -22,6 +21,19 @@ namespace Devoxx.Model
             schedule.Day = schedule.Slots.First().Day;
            
             return schedule;
+        }
+
+        public static Index CreateIndex(Schedule schedule, Func<Slot, string> indexColumn)
+        {
+            var index = new List<IndexValue>();
+            var times = schedule.Slots.Select(indexColumn).Distinct();
+            foreach (var time in times)
+            {
+                var indexValue = new IndexValue(time, schedule.Day);
+                index.Add(indexValue);
+            }
+            var item = new Index(schedule.Day, index);
+            return item;
         }
     }
 }

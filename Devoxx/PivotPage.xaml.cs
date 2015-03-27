@@ -1,23 +1,10 @@
-﻿using Devoxx.Common;
-using Devoxx.Data;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Devoxx.Common;
+using Devoxx.Data;
 using Devoxx.Model;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
@@ -76,7 +63,7 @@ namespace Devoxx
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var sampleDataGroup = await ScheduleDataSource.GetGroupAsync(FirstGroupName);
+            var sampleDataGroup = await ScheduleDataSource.GetScheduleAsync(FirstGroupName);
             this.DefaultViewModel[FirstGroupName] = sampleDataGroup;
         }
 
@@ -136,7 +123,7 @@ namespace Devoxx
         /// </summary>
         private async void SecondPivot_Loaded(object sender, RoutedEventArgs e)
         {
-            var sampleDataGroup = await ScheduleDataSource.GetGroupAsync(SecondGroupName);
+            var sampleDataGroup = await ScheduleDataSource.GetScheduleAsync(SecondGroupName);
             this.DefaultViewModel[SecondGroupName] = sampleDataGroup;
         }
 
@@ -145,7 +132,7 @@ namespace Devoxx
         /// </summary>
         private async void ThirdPivot_Loaded(object sender, RoutedEventArgs e)
         {
-            var sampleDataGroup = await ScheduleDataSource.GetGroupAsync(ThirdGroupName);
+            var sampleDataGroup = await ScheduleDataSource.GetScheduleAsync(ThirdGroupName);
             this.DefaultViewModel[ThirdGroupName] = sampleDataGroup;
         }
 
@@ -175,5 +162,13 @@ namespace Devoxx
         }
 
         #endregion
+
+        private void GoToScheduleByHourPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(ScheduleByHourPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
     }
 }
