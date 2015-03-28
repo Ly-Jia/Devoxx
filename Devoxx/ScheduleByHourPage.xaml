@@ -20,7 +20,7 @@
         <Pivot x:Uid="ScheduleByHourPivot" Title="Agenda par horaire" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Foreground="LimeGreen" >
             <!--Pivot item one-->
             <PivotItem
-                x:Uid="ScheduleByHour1"
+                x:Uid="PivotItem1"
                 Margin="19,14.5,0,0"
                 Header="Mercredi"
                 DataContext="{Binding wednesdayHour}"
@@ -49,7 +49,7 @@
 
             <!--Pivot item two-->
             <PivotItem
-                x:Uid="ScheduleByHour2"
+                x:Uid="PivotItem2"
                 Margin="19,14.5,0,0"
                 Header="Jeudi"
                 DataContext="{Binding thursdayHour}"
@@ -79,7 +79,7 @@
 
             <!--Pivot item three-->
             <PivotItem
-                x:Uid="ScheduleByHour3"
+                x:Uid="PivotItem3"
                 Margin="19,14.5,0,0"
                 Header="Vendredi"
                 DataContext="{Binding fridayHour}"
