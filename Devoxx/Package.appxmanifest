@@ -3,8 +3,8 @@
   <Identity Name="395bf50a-6e60-4854-ac75-d0a14f14ea03" Publisher="CN=Ly-Jia" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="395bf50a-6e60-4854-ac75-d0a14f14ea03" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Devoxx</DisplayName>
-    <PublisherDisplayName>Ly-Jia</PublisherDisplayName>
+    <DisplayName>Devoxx.NET</DisplayName>
+    <PublisherDisplayName>Ly-Jia Goldstein</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -16,10 +16,13 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Devoxx.App">
-      <m3:VisualElements DisplayName="Devoxx by Arolla" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Planning Devoxx 2015" ForegroundText="light" BackgroundColor="transparent">
+      <m3:VisualElements DisplayName="Devoxx.NET" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Planning Devoxx 2015" ForegroundText="light" BackgroundColor="transparent">
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
+        <m3:InitialRotationPreference>
+          <m3:Rotation Preference="portrait" />
+        </m3:InitialRotationPreference>
       </m3:VisualElements>
     </Application>
   </Applications>
