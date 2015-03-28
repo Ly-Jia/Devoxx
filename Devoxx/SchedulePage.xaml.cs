@@ -73,10 +73,9 @@ namespace Devoxx
         {
             var slots = e.NavigationParameter as IEnumerable<Slot>;
             this.DefaultViewModel["Slots"] = slots;
-            if (slots.Any())
-            {
-                this.DefaultViewModel["Hour"] = slots.First().FromTimeToTime;
-            }            
+
+            this.DefaultViewModel["Index"] = resourceLoader.GetString(slots.First().Day);
+                    
         }
 
         /// <summary>

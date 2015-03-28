@@ -5,12 +5,12 @@ namespace Devoxx.Model
     public class Index
     {
         public string Key { get; set; }
-        public IList<IndexValue> Hours { get; set; }
+        public IList<IndexValue> Values { get; set; }
 
-        public Index(string key, IList<IndexValue> hours)
+        public Index(string key, IList<IndexValue> values)
         {
             Key = key;
-            Hours = hours;
+            Values = values;
         }
     }
 }

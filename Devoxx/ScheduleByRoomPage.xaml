@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Devoxx.ScheduleByHourPage"
+    x:Class="Devoxx.ScheduleByRoomPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
@@ -17,19 +17,19 @@
 
     <Grid>
         
-        <Pivot x:Uid="ScheduleByHourPivot" Title="Agenda par horaire" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Foreground="LimeGreen" >
+        <Pivot x:Uid="ScheduleByRoomPivot" Title="Agenda par horaire" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Foreground="LimeGreen" >
             <!--Pivot item one-->
             <PivotItem
                 x:Uid="PivotItem1"
                 Margin="19,14.5,0,0"
                 Header="Mercredi"
-                DataContext="{Binding wednesdayHour}"
+                DataContext="{Binding wednesdayRoom}"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
 
                 <ListView
                     ItemsSource="{Binding Values}"
                     IsItemClickEnabled="True"
-                    ItemClick="scheduleByHourItem_Click"
+                    ItemClick="scheduleByRoomItem_Click"
                     ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -57,9 +57,9 @@
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
 
                 <ListView
-                    ItemsSource="{Binding Hours}"
+                    ItemsSource="{Binding Values}"
                     IsItemClickEnabled="True"
-                    ItemClick="scheduleByHourItem_Click"
+                    ItemClick="scheduleByRoomItem_Click"
                     ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -87,9 +87,9 @@
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
 
                 <ListView
-                    ItemsSource="{Binding Hours}"
+                    ItemsSource="{Binding Values}"
                     IsItemClickEnabled="True"
-                    ItemClick="scheduleByHourItem_Click"
+                    ItemClick="scheduleByRoomItem_Click"
                     ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>

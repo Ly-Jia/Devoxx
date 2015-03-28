@@ -150,4 +150,13 @@
   <data name="ScheduleByHourPivot.Title" xml:space="preserve">
     <value>PLANNING PAR HORAIRE</value>
   </data>
+  <data name="ScheduleByRoomButton.Label" xml:space="preserve">
+    <value>Planning par salle</value>
+  </data>
+  <data name="ScheduleByRoomPivot.Title" xml:space="preserve">
+    <value>PLANNING PAR SALLE</value>
+  </data>
+  <data name="wednesday" xml:space="preserve">
+    <value>MERCREDI</value>
+  </data>
 </root>

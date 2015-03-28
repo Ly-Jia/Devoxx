@@ -108,11 +108,11 @@ namespace Devoxx
         /// <summary>
         /// Invoked when an item within a section is clicked.
         /// </summary>
-        private void scheduleByHourButton_Click(object sender, ItemClickEventArgs e)
+        private void scheduleByHourItem_Click(object sender, ItemClickEventArgs e)
         {
             var hour = ((IndexValue)e.ClickedItem);
-            
             var schedule = ScheduleDataSource.GetScheduleOfHourAsync(hour.Key, hour.Value);
+            
             if (!Frame.Navigate(typeof(SchedulePage), schedule))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));

@@ -155,6 +155,7 @@
         <CommandBar>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="ScheduleByHourButton" x:Name="ScheduleByHourButton" Label="Planning par heure" Click="GoToScheduleByHourPage"/>
+                <AppBarButton x:Uid="ScheduleByRoomButton" x:Name="ScheduleByRoomButton" Label="Planning par salle" Click="GoToScheduleByRoomPage"/>
                 <AppBarButton x:Uid="AboutButton" x:Name="AboutButton" Label="A propos" />
             </CommandBar.SecondaryCommands>
         </CommandBar>

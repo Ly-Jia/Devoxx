@@ -11,17 +11,17 @@ using Devoxx.Model;
 
 namespace Devoxx
 {
-    public sealed partial class PivotPage : Page
+    public sealed partial class ScheduleByRoomPage : Page
     {
-        private const string FirstGroupName = "wednesday";
-        private const string SecondGroupName = "thursday";
-        private const string ThirdGroupName = "friday";
+        private const string FirstGroupName = "wednesdayRoom";
+        private const string SecondGroupName = "thursdayRoom";
+        private const string ThirdGroupName = "fridayRoom";
 
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
 
-        public PivotPage()
+        public ScheduleByRoomPage()
         {
             this.InitializeComponent();
 
@@ -62,9 +62,27 @@ namespace Devoxx
         /// session. The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var sampleDataGroup = await ScheduleDataSource.GetScheduleAsync(FirstGroupName);
-            this.DefaultViewModel[FirstGroupName] = sampleDataGroup;
+
+            var index = await ScheduleDataSource.GetRoomsIndex("wednesday");
+            this.DefaultViewModel[FirstGroupName] = index;
+        }
+
+        /// <summary>
+        /// Loads the content for the second pivot item when it is scrolled into view.
+        /// </summary>
+        private async void SecondPivot_Loaded(object sender, RoutedEventArgs e)
+        {
+            var index = await ScheduleDataSource.GetRoomsIndex("thursday");
+            this.DefaultViewModel[SecondGroupName] = index;
+        }
+
+        /// <summary>
+        /// Loads the content for the third pivot item when it is scrolled into view.
+        /// </summary>
+        private async void ThirdPivot_Loaded(object sender, RoutedEventArgs e)
+        {
+            var index = await ScheduleDataSource.GetRoomsIndex("friday");
+            this.DefaultViewModel[ThirdGroupName] = index;
         }
 
         /// <summary>
@@ -84,57 +102,25 @@ namespace Devoxx
         /// Adds an item to the list when the app bar button is clicked.
         /// </summary>
         private void FavoriteAppBarButton_Click(object sender, RoutedEventArgs e)
-        {/*
-            string groupName = this.pivot.SelectedIndex == 0 ? FirstGroupName : SecondGroupName;
-            var group = this.DefaultViewModel[groupName] as SampleDataGroup;
-            var nextItemId = group.Items.Count + 1;
-            var newItem = new SampleDataItem(
-                string.Format(CultureInfo.InvariantCulture, "Group-{0}-Item-{1}", this.pivot.SelectedIndex + 1, nextItemId),
-                string.Format(CultureInfo.CurrentCulture, this.resourceLoader.GetString("NewItemTitle"), nextItemId),
-                string.Empty,
-                string.Empty,
-                this.resourceLoader.GetString("NewItemDescription"),
-                string.Empty);
-
-            group.Items.Add(newItem);
-
-            // Scroll the new item into view.
-            var container = this.pivot.ContainerFromIndex(this.pivot.SelectedIndex) as ContentControl;
-            var listView = container.ContentTemplateRoot as ListView;
-            listView.ScrollIntoView(newItem, ScrollIntoViewAlignment.Leading);*/
+        {
         }
-
+        
         /// <summary>
         /// Invoked when an item within a section is clicked.
         /// </summary>
-        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
+        private void scheduleByRoomItem_Click(object sender, ItemClickEventArgs e)
         {
-            // Navigate to the appropriate destination page, configuring the new page
-            // by passing required information as a navigation parameter
-            var itemId = ((Slot)e.ClickedItem).Id;
-            if (!Frame.Navigate(typeof(ItemPage), itemId))
+            var room = ((IndexValue)e.ClickedItem);
+
+            var schedule = ScheduleDataSource.GetScheduleOfRoomAsync(room.Key, room.Value);
+            
+            if (!Frame.Navigate(typeof(SchedulePage), schedule))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
         }
 
-        /// <summary>
-        /// Loads the content for the second pivot item when it is scrolled into view.
-        /// </summary>
-        private async void SecondPivot_Loaded(object sender, RoutedEventArgs e)
-        {
-            var sampleDataGroup = await ScheduleDataSource.GetScheduleAsync(SecondGroupName);
-            this.DefaultViewModel[SecondGroupName] = sampleDataGroup;
-        }
-
-        /// <summary>
-        /// Loads the content for the third pivot item when it is scrolled into view.
-        /// </summary>
-        private async void ThirdPivot_Loaded(object sender, RoutedEventArgs e)
-        {
-            var sampleDataGroup = await ScheduleDataSource.GetScheduleAsync(ThirdGroupName);
-            this.DefaultViewModel[ThirdGroupName] = sampleDataGroup;
-        }
+        
 
         #region NavigationHelper registration
 
@@ -162,21 +148,5 @@ namespace Devoxx
         }
 
         #endregion
-
-        private void GoToScheduleByHourPage(object sender, RoutedEventArgs e)
-        {
-            if (!Frame.Navigate(typeof(ScheduleByHourPage), e))
-            {
-                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
-            }
-        }
-
-        private void GoToScheduleByRoomPage(object sender, RoutedEventArgs e)
-        {
-            if (!Frame.Navigate(typeof(ScheduleByRoomPage), e))
-            {
-                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
-            }
-        }
     }
 }

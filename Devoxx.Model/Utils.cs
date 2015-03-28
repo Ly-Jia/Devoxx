@@ -26,10 +26,10 @@ namespace Devoxx.Model
         public static Index CreateIndex(Schedule schedule, Func<Slot, string> indexColumn)
         {
             var index = new List<IndexValue>();
-            var times = schedule.Slots.Select(indexColumn).Distinct();
-            foreach (var time in times)
+            var values = schedule.Slots.Select(indexColumn).Distinct();
+            foreach (var value in values)
             {
-                var indexValue = new IndexValue(time, schedule.Day);
+                var indexValue = new IndexValue(value, schedule.Day);
                 index.Add(indexValue);
             }
             var item = new Index(schedule.Day, index);

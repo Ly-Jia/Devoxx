@@ -21,11 +21,17 @@ namespace Devoxx.Data
             get { return this.schedules; }
         }
 
-        private ObservableCollection<Index> hoursCriteria = new ObservableCollection<Index>();
-
-        public ObservableCollection<Index> HoursCriteria
+        private ObservableCollection<Index> hoursIndex = new ObservableCollection<Index>();
+        public ObservableCollection<Index> HoursIndex
         {
-            get { return this.hoursCriteria; }
+            get { return this.hoursIndex; }
+        }
+
+        private ObservableCollection<Index> roomsIndex = new ObservableCollection<Index>();
+
+        public ObservableCollection<Index> RoomsIndex
+        {
+            get { return this.roomsIndex; }
         }
 
         public static async Task<Schedule> GetScheduleAsync(string day)
@@ -41,11 +47,19 @@ namespace Devoxx.Data
         {
             if (!_scheduleDataSource.Schedules.Any())
                 await _scheduleDataSource.GetScheduleDataAsync();
-            var matches = _scheduleDataSource.HoursCriteria.Where(s => s.Key == day);
+            var matches = _scheduleDataSource.HoursIndex.Where(s => s.Key == day);
             if (matches.Count() == 1) return matches.First();
             return null;
         }
 
+        public static async Task<Index> GetRoomsIndex(string day)
+        {
+            if (!_scheduleDataSource.Schedules.Any())
+                await _scheduleDataSource.GetScheduleDataAsync();
+            var matches = _scheduleDataSource.RoomsIndex.Where(s => s.Key == day);
+            if (matches.Count() == 1) return matches.First();
+            return null;
+        }
         public static async Task<Slot> GetSlotAsync(string uniqueId)
         {
             if (!_scheduleDataSource.Schedules.Any())
@@ -77,10 +91,12 @@ namespace Devoxx.Data
                         jsonText = await response.Content.ReadAsStringAsync();
                         var schedule = Utils.DeserializeSchedule(jsonText);
                         schedules.Add(schedule);
-
                         
-                        var item = Utils.CreateIndex(schedule, HourCriteria());
-                        hoursCriteria.Add(item);
+                        var hIndex = Utils.CreateIndex(schedule, HourCriteria());
+                        hoursIndex.Add(hIndex);
+
+                        var rIndex = Utils.CreateIndex(schedule, RoomCriteria());
+                        roomsIndex.Add(rIndex);
                     }
                 }
 
@@ -92,18 +108,33 @@ namespace Devoxx.Data
             }
         }
 
+
+        public static IEnumerable<Slot> GetScheduleOfHourAsync(string day, string hour)
+        {
+            var schedule = _scheduleDataSource.Schedules.FirstOrDefault(s => s.Day == day);
+            var slots = schedule.Slots;
+
+            return slots.Where(s => s.FromTimeToTime == hour);
+        }
+
+        public static IEnumerable<Slot> GetScheduleOfRoomAsync(string day, string room)
+        {
+            var schedule = _scheduleDataSource.Schedules.FirstOrDefault(s => s.Day == day);
+            var slots = schedule.Slots;
+
+            return slots.Where(s => s.RoomName == room);
+        }
+
+        private Func<Slot, string> RoomCriteria()
+        {
+            return s => s.RoomName;
+        }
+
         private Func<Slot, string> HourCriteria()
         {
             return s => s.FromTimeToTime;
         }
 
 
-        public static IEnumerable<Slot> GetScheduleOfHourAsync(string day, string hour)
-        {
-            var schedule = _scheduleDataSource.Schedules.FirstOrDefault(s => s.Day == day);
-            var slots = schedule.Slots;
-            
-            return slots.Where(s => s.FromTimeToTime == hour);
-        }
     }
 }

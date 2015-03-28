@@ -29,7 +29,7 @@
         <!-- Title Panel -->
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
             <TextBlock x:Uid="Header" Text="DEVOXX BY AROLLA" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0" Foreground="LimeGreen"/>
-            <TextBlock Text="{Binding Hour}" Style="{ThemeResource HeaderTextBlockStyle}" Margin="0,-6.5,0,26.5" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" />
+            <TextBlock Text="{Binding Index}" Style="{ThemeResource HeaderTextBlockStyle}" Margin="0,-6.5,0,26.5" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" />
         </StackPanel>
 
         <ListView
@@ -49,6 +49,13 @@
                             Style="{ThemeResource ListViewItemContentTextBlockStyle}"
                             Margin="0,0,19,0"
                             Foreground="LimeGreen"/>
+                        <TextBlock
+                            Text="{Binding FromTimeToTime}"
+                            TextWrapping="WrapWholeWords"
+                            Pivot.SlideInAnimationGroup="2" 
+                            CommonNavigationTransitionInfo.IsStaggerElement="True" 
+                            Style="{ThemeResource ListViewItemContentTextBlockStyle}"
+                            Margin="0,0,19,0"/>
                         <TextBlock
                             Text="{Binding RoomName}"
                             TextWrapping="WrapWholeWords"

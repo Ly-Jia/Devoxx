@@ -124,7 +124,7 @@
     <value>favorite</value>
   </data>
   <data name="Header.Text" xml:space="preserve">
-    <value>DEVOXX AGENDA</value>
+    <value>AGENDA DEVOXX</value>
   </data>
   <data name="NavigationFailedExceptionMessage" xml:space="preserve">
     <value>Navigation failed.</value>
@@ -133,7 +133,7 @@
     <value>Item Title: {0}</value>
   </data>
   <data name="Pivot.Title" xml:space="preserve">
-    <value>DEVOXX AGENDA</value>
+    <value>AGENDA DEVOXX </value>
   </data>
   <data name="PivotItem1.Header" xml:space="preserve">
     <value>WEDNESDAY</value>
@@ -149,5 +149,14 @@
   </data>
   <data name="ScheduleByHourPivot.Title" xml:space="preserve">
     <value>SCHEDULE BY HOUR</value>
+  </data>
+  <data name="ScheduleByRoomButton.Label" xml:space="preserve">
+    <value>Schedule by room</value>
+  </data>
+  <data name="ScheduleByRoomPivot.Title" xml:space="preserve">
+    <value>SCHEDULE BY ROOM</value>
+  </data>
+  <data name="wednesday" xml:space="preserve">
+    <value>WEDNESDAY</value>
   </data>
 </root>
