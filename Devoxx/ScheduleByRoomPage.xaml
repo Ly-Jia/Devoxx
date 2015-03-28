@@ -52,7 +52,7 @@
                 x:Uid="PivotItem2"
                 Margin="19,14.5,0,0"
                 Header="Jeudi"
-                DataContext="{Binding thursdayHour}"
+                DataContext="{Binding thursdayRoom}"
                 Loaded="SecondPivot_Loaded"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
 
@@ -82,7 +82,7 @@
                 x:Uid="PivotItem3"
                 Margin="19,14.5,0,0"
                 Header="Vendredi"
-                DataContext="{Binding fridayHour}"
+                DataContext="{Binding fridayRoom}"
                 Loaded="ThirdPivot_Loaded"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
 

@@ -57,7 +57,7 @@
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
 
                 <ListView
-                    ItemsSource="{Binding Hours}"
+                    ItemsSource="{Binding Values}"
                     IsItemClickEnabled="True"
                     ItemClick="scheduleByHourItem_Click"
                     ContinuumNavigationTransitionInfo.ExitElementContainer="True">
@@ -87,7 +87,7 @@
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
 
                 <ListView
-                    ItemsSource="{Binding Hours}"
+                    ItemsSource="{Binding Values}"
                     IsItemClickEnabled="True"
                     ItemClick="scheduleByHourItem_Click"
                     ContinuumNavigationTransitionInfo.ExitElementContainer="True">

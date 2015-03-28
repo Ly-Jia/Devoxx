@@ -14,6 +14,7 @@ namespace Devoxx.Data
         public event EventHandler SchedulesLoaded;
         public bool IsLoaded = false;
 
+        
         private static ScheduleDataSource _scheduleDataSource = new ScheduleDataSource();
         private ObservableCollection<Schedule> schedules = new ObservableCollection<Schedule>();
         public ObservableCollection<Schedule> Schedules
@@ -36,7 +37,7 @@ namespace Devoxx.Data
 
         public static async Task<Schedule> GetScheduleAsync(string day)
         {
-            await _scheduleDataSource.GetScheduleDataAsync();
+                await _scheduleDataSource.GetScheduleDataAsync();
             // Simple linear search is acceptable for small data sets
             var matches = _scheduleDataSource.Schedules.Where(s => s.Day == day);
             if (matches.Count() == 1) return matches.First();
@@ -45,8 +46,7 @@ namespace Devoxx.Data
 
         public static async Task<Index> GetHoursIndex(string day)
         {
-            if (!_scheduleDataSource.Schedules.Any())
-                await _scheduleDataSource.GetScheduleDataAsync();
+           
             var matches = _scheduleDataSource.HoursIndex.Where(s => s.Key == day);
             if (matches.Count() == 1) return matches.First();
             return null;
@@ -54,16 +54,14 @@ namespace Devoxx.Data
 
         public static async Task<Index> GetRoomsIndex(string day)
         {
-            if (!_scheduleDataSource.Schedules.Any())
-                await _scheduleDataSource.GetScheduleDataAsync();
+           
             var matches = _scheduleDataSource.RoomsIndex.Where(s => s.Key == day);
             if (matches.Count() == 1) return matches.First();
             return null;
         }
         public static async Task<Slot> GetSlotAsync(string uniqueId)
         {
-            if (!_scheduleDataSource.Schedules.Any())
-                await _scheduleDataSource.GetScheduleDataAsync();
+           
             // Simple linear search is acceptable for small data sets
             List<Slot> slots = _scheduleDataSource.Schedules.SelectMany(schedule => schedule.Slots).Distinct().ToList();
             var matches = slots.Where(slot => slot.Id == uniqueId).ToList();
