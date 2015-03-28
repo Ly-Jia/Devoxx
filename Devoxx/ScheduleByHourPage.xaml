@@ -111,8 +111,8 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="ScheduleByHourButton" x:Name="ScheduleByHourButton" Label="Planning par heure" />
-                <AppBarButton x:Uid="AboutButton" x:Name="AboutButton" Label="A propos" />
+                <AppBarButton x:Uid="ScheduleByRoomButton" x:Name="ScheduleByRoomButton" Label="Planning par salle" Click="GoToScheduleByRoomPage"/>
+                <AppBarButton x:Uid="AboutButton" x:Name="AboutButton" Label="A propos" Click="GoToAboutPage"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

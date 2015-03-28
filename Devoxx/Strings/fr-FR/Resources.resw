@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About.Text" xml:space="preserve">
+    <value>A propos</value>
+  </data>
   <data name="AboutButton.Label" xml:space="preserve">
     <value>A propos</value>
   </data>
   <data name="AddAppBarButton.Label" xml:space="preserve">
     <value>favori</value>
+  </data>
+  <data name="Author.Text" xml:space="preserve">
+    <value>Auteur : Ly-Jia Goldstein (Arolla)</value>
+  </data>
+  <data name="Content.Text" xml:space="preserve">
+    <value>Devoxx.NET est une application non-officielle et opensource qui vous permet de visualiser facilement le planning de Devoxx France 2015 sur votre téléphone.</value>
+  </data>
+  <data name="friday" xml:space="preserve">
+    <value>VENDREDI</value>
   </data>
   <data name="Header.Text" xml:space="preserve">
     <value>DEVOXX.NET</value>
@@ -155,6 +167,9 @@
   </data>
   <data name="ScheduleByRoomPivot.Title" xml:space="preserve">
     <value>PLANNING PAR SALLE</value>
+  </data>
+  <data name="thursday" xml:space="preserve">
+    <value>JEUDI</value>
   </data>
   <data name="wednesday" xml:space="preserve">
     <value>MERCREDI</value>

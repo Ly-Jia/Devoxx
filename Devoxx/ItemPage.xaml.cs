@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -16,6 +17,7 @@ namespace Devoxx
     {
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
 
         public ItemPage()
         {
@@ -72,7 +74,29 @@ namespace Devoxx
         {
             // TODO: Save the unique state of the page here.
         }
+        private void GoToScheduleByHourPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(ScheduleByHourPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
 
+        private void GoToScheduleByRoomPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(ScheduleByRoomPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
+
+        private void GoToAboutPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(AboutPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
         #region NavigationHelper registration
 
         /// <summary>

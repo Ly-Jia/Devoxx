@@ -146,6 +146,21 @@ namespace Devoxx
             this.navigationHelper.OnNavigatedFrom(e);
         }
 
+        private void GoToScheduleByRoomPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(ScheduleByRoomPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
+
+        private void GoToAboutPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(AboutPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
         #endregion
     }
 }

@@ -120,7 +120,21 @@ namespace Devoxx
             }
         }
 
-        
+        private void GoToScheduleByHourPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(ScheduleByHourPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
+
+        private void GoToAboutPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(AboutPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
 
         #region NavigationHelper registration
 
