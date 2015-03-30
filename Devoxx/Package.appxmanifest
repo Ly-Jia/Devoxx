@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="395bf50a-6e60-4854-ac75-d0a14f14ea03" Publisher="CN=Ly-Jia" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="395bf50a-6e60-4854-ac75-d0a14f14ea03" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="53132Ly-Jia.Devoxx.NET" Publisher="CN=5055EC59-69EA-47A0-9A39-6DDC5F9C59C1" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="d3d5e582-17cc-4049-b186-73f820b240d1" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Devoxx.NET</DisplayName>
-    <PublisherDisplayName>Ly-Jia Goldstein</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <PublisherDisplayName>Ly-Jia</PublisherDisplayName>
+    <Logo>Assets\Logo-store-50.png</Logo>
   </Properties>
   <Prerequisites>
     <OSMinVersion>6.3.1</OSMinVersion>
@@ -16,10 +16,9 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Devoxx.App">
-      <m3:VisualElements DisplayName="Devoxx.NET" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Planning Devoxx 2015" ForegroundText="light" BackgroundColor="transparent">
-        <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
+      <m3:VisualElements DisplayName="Devoxx.NET" Square150x150Logo="Assets\Logo-150.png" Square44x44Logo="Assets\Logo-44.png" Description="Planning Devoxx 2015" ForegroundText="light" BackgroundColor="transparent">
+        <m3:DefaultTile Square71x71Logo="Assets\Logo-71.png">
         </m3:DefaultTile>
-        <m3:SplashScreen Image="Assets\SplashScreen.png" />
         <m3:InitialRotationPreference>
           <m3:Rotation Preference="portrait" />
         </m3:InitialRotationPreference>

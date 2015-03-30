@@ -1,0 +1,2 @@
+MainPackage=C:\Users\Ly-Jia\Documents\Projects\Devoxx\Devoxx\bin\Release\Devoxx_1.1.0.0_Bundle\Devoxx_1.1.0.0_AnyCPU.appx
+SymbolPackage=C:\Users\Ly-Jia\Documents\Projects\Devoxx\Devoxx\AppPackages\Devoxx_1.1.0.0_Test\Devoxx_1.1.0.0_AnyCPU.appxsym
