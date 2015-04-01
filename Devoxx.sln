@@ -10,9 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Devoxx.Model", "Test.Devoxx.Model\Test.Devoxx.Model.csproj", "{01BE5BF1-7F31-4C52-BC88-9F446386C520}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{689C19E7-95DE-4409-93BE-0CAAE1D388A8}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

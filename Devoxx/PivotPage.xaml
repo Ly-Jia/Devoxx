@@ -45,7 +45,7 @@
 
                                 <FlyoutBase.AttachedFlyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem Text="Add" Click="AddAgendaSlot"/>
+                                        <MenuFlyoutItem Text="Favorite" Click="AddAgendaSlot"/>
                                     </MenuFlyout>
                                 </FlyoutBase.AttachedFlyout>
 

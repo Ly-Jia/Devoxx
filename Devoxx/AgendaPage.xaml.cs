@@ -162,5 +162,16 @@ namespace Devoxx
         }
 
         #endregion
+
+        private void RemoveAgendaSlot(object sender, RoutedEventArgs e)
+        {
+            var slot = (e.OriginalSource as FrameworkElement).DataContext;
+            AgendaDataSource.DeleteSlotAsync(slot as Slot);
+
+            if (!Frame.Navigate(typeof(AgendaPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
     }
 }
