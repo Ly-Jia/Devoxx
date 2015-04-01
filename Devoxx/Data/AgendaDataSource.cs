@@ -13,7 +13,6 @@ namespace Devoxx.Data
     public class AgendaDataSource
     {
         private StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-        private Uri agendaUri = new Uri("ms-appadata:Agenda.json");
 
         private static AgendaDataSource _agendaDataSource = new AgendaDataSource();
 
@@ -66,7 +65,6 @@ namespace Devoxx.Data
                 try
                 {
                     var file = await localFolder.GetFileAsync("Agenda.json");
-                    //var storageFile = await StorageFile.GetFileFromApplicationUriAsync(agendaUri);
                     var agendaText = await FileIO.ReadTextAsync(file);
 
                     var slots = Utils.DeserializeAgenda(agendaText);

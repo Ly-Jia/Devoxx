@@ -112,18 +112,16 @@ namespace Devoxx
 
         private void GoToAgendaPage(object sender, RoutedEventArgs e)
         {
-            if (!Frame.Navigate(typeof(AgendaPage), e))
+            if (!Frame.Navigate(typeof (AgendaPage), e))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
         }
 
-        private void Slot_Holding(object sender, HoldingRoutedEventArgs e)
+        private void AddAgendaSlot(object sender, RoutedEventArgs e)
         {
-            FrameworkElement senderElement = sender as FrameworkElement;
-            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
-
-            flyoutBase.ShowAt(senderElement);
+            var slot = (e.OriginalSource as FrameworkElement).DataContext;
+            AgendaDataSource.AddSlotAsync(slot as Slot);
         }
     }
 }

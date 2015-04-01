@@ -132,6 +132,7 @@
     <Compile Include="AgendaPage.xaml.cs">
       <DependentUpon>AgendaPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Actions\OpenMenuFlyoutAction.cs" />
     <Compile Include="ScheduleByRoomPage.xaml.cs">
       <DependentUpon>ScheduleByRoomPage.xaml</DependentUpon>
     </Compile>
@@ -180,8 +181,14 @@
     <Content Include="Data\Wednesday.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="README_FIRST.txt" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="StoreManifest.xml" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -204,6 +211,11 @@
     <PRIResource Include="Strings\fr-FR\Resources.resw">
       <SubType>Designer</SubType>
     </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
+      <Name>Behaviors SDK %28XAML%29</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
