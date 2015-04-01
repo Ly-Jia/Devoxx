@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
@@ -9,18 +10,62 @@ namespace Devoxx.Model
 {
     public class Utils
     {
+        private static IList<Type> types = new List<Type>
+        {
+            typeof (Slot),
+            typeof (Break),
+            typeof (Talk),
+            typeof (Room),
+            typeof (Speaker),
+            typeof (Link)
+        };
+
+        private static DataContractJsonSerializer agendaSerializer = new DataContractJsonSerializer(typeof (ObservableCollection<Slot>), types);
+        private static DataContractJsonSerializer scheduleSerializer = new DataContractJsonSerializer(typeof(Schedule), types);
+
         public static Schedule DeserializeSchedule(string sheduleText)
         {
-            List<Type> types = new List<Type>();
-            types.Add(typeof(Slot));
-            types.Add(typeof(Break));
-            types.Add(typeof(Talk));
-            DataContractJsonSerializer deserializer = new DataContractJsonSerializer(typeof(Schedule), types);
             var stream = new MemoryStream(Encoding.Unicode.GetBytes(sheduleText));
-            var schedule = (Schedule)deserializer.ReadObject(stream);
+            return DeserializeSchedule(stream);
+        }
+
+        public static Schedule DeserializeSchedule(Stream stream)
+        {
+            var schedule = (Schedule) scheduleSerializer.ReadObject(stream);
             schedule.Day = schedule.Slots.First().Day;
-           
+
             return schedule;
+        }
+
+        public static byte[] SerizalizeSchedule(Schedule schedule)
+        {
+            using (var stream = new MemoryStream())
+            {
+                scheduleSerializer.WriteObject(stream, schedule);
+                return StreamToByteArray(stream);
+            }
+        }
+
+        public static ObservableCollection<Slot> DeserializeAgenda(Stream stream)
+        {
+            var agenda = (ObservableCollection<Slot>) agendaSerializer.ReadObject(stream);
+            return agenda;
+        }
+
+        public static byte[] SerializeAgenda(IEnumerable<Slot> agenda)
+        {
+            using (var stream = new MemoryStream())
+            {
+                agendaSerializer.WriteObject(stream, agenda);
+                return StreamToByteArray(stream);
+            }
+        }
+
+        private static byte[] StreamToByteArray(MemoryStream stream)
+        {
+            var streamReader = new StreamReader(stream);
+            var text = streamReader.ReadToEnd();
+            return Encoding.Unicode.GetBytes(text);
         }
 
         public static Index CreateIndex(Schedule schedule, Func<Slot, string> indexColumn)

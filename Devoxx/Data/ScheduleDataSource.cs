@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Devoxx.Model;
 
 namespace Devoxx.Data
@@ -73,31 +76,8 @@ namespace Devoxx.Data
         {
             if (!IsLoaded)
             {
-                IEnumerable<string> pathes = new List<string>
-                {
-                    "http://cfp.devoxx.fr/api/conferences/DevoxxFR2015/schedules/wednesday/",
-                    "http://cfp.devoxx.fr/api/conferences/DevoxxFR2015/schedules/thursday/",
-                    "http://cfp.devoxx.fr/api/conferences/DevoxxFR2015/schedules/friday/"
-                };
-                string jsonText;
-
-                using (var client = new HttpClient())
-                {
-                    foreach (var path in pathes)
-                    {
-                        var response = await client.GetAsync(path);
-                        jsonText = await response.Content.ReadAsStringAsync();
-                        var schedule = Utils.DeserializeSchedule(jsonText);
-                        schedules.Add(schedule);
-                        
-                        var hIndex = Utils.CreateIndex(schedule, HourCriteria());
-                        hoursIndex.Add(hIndex);
-
-                        var rIndex = Utils.CreateIndex(schedule, RoomCriteria());
-                        roomsIndex.Add(rIndex);
-                    }
-                }
-
+                await LoadAsync();
+                CreateIndexes();
                 // Fire a SchedulesLoaded event
                 if (SchedulesLoaded != null)
                     SchedulesLoaded(this, null);
@@ -106,6 +86,55 @@ namespace Devoxx.Data
             }
         }
 
+        private async Task LoadAsync()
+        {
+            Uri wednesdayUri = new Uri("ms-appx:///Data/Wednesday.json");
+            Uri thursdayUri = new Uri("ms-appx:///Data/Thursday.json");
+            Uri fridayUri = new Uri("ms-appx:///Data/Friday.json");
+
+            var wednesdayJsonText = await FileIO.ReadTextAsync(await StorageFile.GetFileFromApplicationUriAsync(wednesdayUri));
+            var thrusdayJsonText = await FileIO.ReadTextAsync(await StorageFile.GetFileFromApplicationUriAsync(thursdayUri));
+            var fridayJsonText = await FileIO.ReadTextAsync(await StorageFile.GetFileFromApplicationUriAsync(fridayUri));
+
+            schedules.Clear();
+            schedules.Add(Utils.DeserializeSchedule(wednesdayJsonText));
+            schedules.Add(Utils.DeserializeSchedule(thrusdayJsonText));
+            schedules.Add(Utils.DeserializeSchedule(fridayJsonText));          
+        }
+
+        private void CreateIndexes()
+        {
+            hoursIndex.Clear();
+            roomsIndex.Clear();
+            foreach (var schedule in schedules)
+            {
+                hoursIndex.Add(Utils.CreateIndex(schedule, HourCriteria()));
+                roomsIndex.Add(Utils.CreateIndex(schedule, RoomCriteria()));
+            }
+        }
+
+        private async Task RefreshAsync()
+        {
+            IEnumerable<string> pathes = new List<string>
+                {
+                    "http://cfp.devoxx.fr/api/conferences/DevoxxFR2015/schedules/wednesday/",
+                    "http://cfp.devoxx.fr/api/conferences/DevoxxFR2015/schedules/thursday/",
+                    "http://cfp.devoxx.fr/api/conferences/DevoxxFR2015/schedules/friday/"
+                };
+            string jsonText;
+            schedules.Clear();
+            using (var client = new HttpClient())
+            {
+                foreach (var path in pathes)
+                {
+                    var response = await client.GetAsync(path);
+                    jsonText = await response.Content.ReadAsStringAsync();
+                    var schedule = Utils.DeserializeSchedule(jsonText);
+                    schedules.Add(schedule);
+                }
+            }
+            CreateIndexes();
+        }
 
         public static IEnumerable<Slot> GetScheduleOfHourAsync(string day, string hour)
         {

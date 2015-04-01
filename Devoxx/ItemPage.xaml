@@ -101,10 +101,11 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <!--AppBarButton x:Uid="FavoriteAppBarButton" x:Name="AddAppBarButton" Label="favorite" Icon="Favorite" Click="FavoriteAppBarButton_Click" /-->
+            <AppBarButton x:Uid="FavoriteAppBarButton" x:Name="AddAppBarButton" Label="favorite" Icon="Favorite" Click="FavoriteAppBarButton_Click" />
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="ScheduleByHourButton" x:Name="ScheduleByHourButton" Label="Planning par heure" Click="GoToScheduleByHourPage"/>
                 <AppBarButton x:Uid="ScheduleByRoomButton" x:Name="ScheduleByRoomButton" Label="Planning par salle" Click="GoToScheduleByRoomPage"/>
+                <AppBarButton x:Uid="AgendaButton" x:Name="AgendaButton" Label="Agenda personnalisé" Click="GoToAgendaPage"/>
                 <AppBarButton x:Uid="AboutButton" x:Name="AboutButton" Label="A propos" Click="GoToAboutPage"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>

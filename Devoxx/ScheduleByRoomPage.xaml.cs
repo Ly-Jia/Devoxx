@@ -162,5 +162,13 @@ namespace Devoxx
         }
 
         #endregion
+
+        private void GoToAgendaPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(AgendaPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
     }
 }

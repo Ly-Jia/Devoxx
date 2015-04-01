@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Devoxx.Common;
 using Devoxx.Data;
+using Devoxx.Model;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
@@ -126,7 +127,15 @@ namespace Devoxx
 
         private void FavoriteAppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            AgendaDataSource.AddSlotAsync((Slot)this.DefaultViewModel["Slot"]);
+        }
+
+        private void GoToAgendaPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(AgendaPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
         }
     }
 }

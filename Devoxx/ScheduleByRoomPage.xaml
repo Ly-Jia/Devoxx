@@ -112,6 +112,7 @@
         <CommandBar>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="ScheduleByHourButton" x:Name="ScheduleByHourButton" Label="Planning par heure" Click="GoToScheduleByHourPage"/>
+                <AppBarButton x:Uid="AgendaButton" x:Name="AgendaButton" Label="Agenda personnalisé" Click="GoToAgendaPage"/>
                 <AppBarButton x:Uid="AboutButton" x:Name="AboutButton" Label="A propos" Click="GoToAboutPage"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>

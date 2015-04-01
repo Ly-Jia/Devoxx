@@ -138,5 +138,11 @@ namespace Devoxx.Model
                 return speakers.ToString();
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            var slot2 = obj as Slot;
+            return this.Id == slot2.Id;
+        }
     }
 }
