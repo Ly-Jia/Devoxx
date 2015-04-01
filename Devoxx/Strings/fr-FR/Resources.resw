@@ -124,7 +124,7 @@
     <value>A propos</value>
   </data>
   <data name="AddAppBarButton.Label" xml:space="preserve">
-    <value>favori</value>
+    <value>Ajouter aux favoris</value>
   </data>
   <data name="Author.Text" xml:space="preserve">
     <value>Auteur : Ly-Jia Goldstein (Arolla)</value>
@@ -173,5 +173,17 @@
   </data>
   <data name="wednesday" xml:space="preserve">
     <value>MERCREDI</value>
+  </data>
+  <data name="AgendaButton.Label" xml:space="preserve">
+    <value>Favoris</value>
+  </data>
+  <data name="AgendaPivot.Title" xml:space="preserve">
+    <value>FAVORIS</value>
+  </data>
+  <data name="Favorite.Text" xml:space="preserve">
+    <value>Ajouter aux favoris</value>
+  </data>
+  <data name="Remove.Text" xml:space="preserve">
+    <value>Supprimer</value>
   </data>
 </root>

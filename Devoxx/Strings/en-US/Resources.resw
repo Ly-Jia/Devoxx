@@ -174,4 +174,16 @@
   <data name="wednesday" xml:space="preserve">
     <value>WEDNESDAY</value>
   </data>
+  <data name="AgendaButton.Label" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="AgendaPivot.Title" xml:space="preserve">
+    <value>FAVORITES</value>
+  </data>
+  <data name="Favorite.Text" xml:space="preserve">
+    <value>Favorite</value>
+  </data>
+  <data name="Remove.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
 </root>

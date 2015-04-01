@@ -2,6 +2,9 @@
     x:Class="Devoxx.SchedulePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:actions="using:Devoxx.Actions"
 
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -41,6 +44,17 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="19,14.5,0,9.5">
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Holding">
+                                <actions:OpenMenuFlyoutAction />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+
+                        <FlyoutBase.AttachedFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem x:Uid="Favorite" Text="Favorite" Click="AddAgendaSlot"/>
+                            </MenuFlyout>
+                        </FlyoutBase.AttachedFlyout>
                         <TextBlock
                             Text="{Binding Title}"
                             TextWrapping="WrapWholeWords"

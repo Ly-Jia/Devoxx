@@ -49,17 +49,7 @@ namespace Devoxx
             get { return this.defaultViewModel; }
         }
 
-        /// <summary>
-        /// Populates the page with content passed during navigation. Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>.
-        /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session. The state will be null the first time a page is visited.</param>
+        
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
 
@@ -67,54 +57,33 @@ namespace Devoxx
             this.DefaultViewModel[FirstGroupName] = agenda;
         }
 
-        /// <summary>
-        /// Loads the content for the second pivot item when it is scrolled into view.
-        /// </summary>
         private async void SecondPivot_Loaded(object sender, RoutedEventArgs e)
         {
-            var agenda = await ScheduleDataSource.GetRoomsIndex(SecondGroupName);
+            var agenda = await AgendaDataSource.GetAgendaByDayAsync(SecondGroupName);
             this.DefaultViewModel[SecondGroupName] = agenda;
         }
 
-        /// <summary>
-        /// Loads the content for the third pivot item when it is scrolled into view.
-        /// </summary>
+        
         private async void ThirdPivot_Loaded(object sender, RoutedEventArgs e)
         {
-            var agenda = await ScheduleDataSource.GetRoomsIndex(ThirdGroupName);
+            var agenda = await AgendaDataSource.GetAgendaByDayAsync(ThirdGroupName);
             this.DefaultViewModel[ThirdGroupName] = agenda;
         }
 
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache. Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/>.</param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
             // TODO: Save the unique state of the page here.
         }
 
-        /// <summary>
-        /// Adds an item to the list when the app bar button is clicked.
-        /// </summary>
-        private void FavoriteAppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
         
         /// <summary>
         /// Invoked when an item within a section is clicked.
         /// </summary>
-        private void scheduleByRoomItem_Click(object sender, ItemClickEventArgs e)
+        private void SlotItem_Click(object sender, ItemClickEventArgs e)
         {
-            var room = ((IndexValue)e.ClickedItem);
+            var slot = ((Slot)e.ClickedItem);
 
-            var schedule = ScheduleDataSource.GetScheduleOfRoomAsync(room.Key, room.Value);
-            
-            if (!Frame.Navigate(typeof(SchedulePage), schedule))
+            if (!Frame.Navigate(typeof(ItemPage), slot.Id))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
@@ -163,12 +132,20 @@ namespace Devoxx
 
         #endregion
 
-        private void RemoveAgendaSlot(object sender, RoutedEventArgs e)
+        private async void RemoveAgendaSlot(object sender, RoutedEventArgs e)
         {
             var slot = (e.OriginalSource as FrameworkElement).DataContext;
-            AgendaDataSource.DeleteSlotAsync(slot as Slot);
+            await AgendaDataSource.DeleteSlotAsync(slot as Slot);
 
             if (!Frame.Navigate(typeof(AgendaPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
+
+        private void GoToScheduleByRoomPage(object sender, RoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(ScheduleByRoomPage), e))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }

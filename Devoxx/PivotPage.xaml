@@ -45,7 +45,7 @@
 
                                 <FlyoutBase.AttachedFlyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem Text="Favorite" Click="AddAgendaSlot"/>
+                                        <MenuFlyoutItem x:Uid="Favorite" Text="Favorite" Click="AddAgendaSlot"/>
                                     </MenuFlyout>
                                 </FlyoutBase.AttachedFlyout>
 
@@ -93,6 +93,17 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,9.5">
+                                <interactivity:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Holding">
+                                        <actions:OpenMenuFlyoutAction />
+                                    </core:EventTriggerBehavior>
+                                </interactivity:Interaction.Behaviors>
+
+                                <FlyoutBase.AttachedFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem x:Uid="Favorite" Text="Favorite" Click="AddAgendaSlot"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.AttachedFlyout>
                                 <TextBlock
                                     Text="{Binding Title}"
                                     TextWrapping="WrapWholeWords"
@@ -137,6 +148,17 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,9.5">
+                                <interactivity:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Holding">
+                                        <actions:OpenMenuFlyoutAction />
+                                    </core:EventTriggerBehavior>
+                                </interactivity:Interaction.Behaviors>
+
+                                <FlyoutBase.AttachedFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem x:Uid="Favorite" Text="Favorite" Click="AddAgendaSlot"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.AttachedFlyout>
                                 <TextBlock
                                     Text="{Binding Title}"
                                     TextWrapping="WrapWholeWords"

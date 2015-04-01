@@ -20,7 +20,7 @@
 
     <Grid>
         
-        <Pivot x:Uid="AgendaPivot" Title="Agenda personnalisé" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Foreground="LimeGreen" >
+        <Pivot x:Uid="AgendaPivot" Title="Favoris" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Foreground="LimeGreen" >
             <!--Pivot item one-->
             <PivotItem
                 x:Uid="PivotItem1"
@@ -31,7 +31,7 @@
                 <ListView
                     ItemsSource="{Binding wednesday}"
                     IsItemClickEnabled="True"
-                    ItemClick="scheduleByRoomItem_Click"
+                    ItemClick="SlotItem_Click"
                     ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -44,7 +44,7 @@
 
                                 <FlyoutBase.AttachedFlyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem Text="Remove" Click="RemoveAgendaSlot"/>
+                                        <MenuFlyoutItem x:Uid="Remove" Text="Remove" Click="RemoveAgendaSlot"/>
                                     </MenuFlyout>
                                 </FlyoutBase.AttachedFlyout>
                                 <TextBlock
@@ -93,11 +93,22 @@
                 <ListView
                     ItemsSource="{Binding thursday}"
                     IsItemClickEnabled="True"
-                    ItemClick="scheduleByRoomItem_Click"
+                    ItemClick="SlotItem_Click"
                     ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="19,14.5,0,9.5">
+                                <interactivity:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Holding">
+                                        <actions:OpenMenuFlyoutAction />
+                                    </core:EventTriggerBehavior>
+                                </interactivity:Interaction.Behaviors>
+
+                                <FlyoutBase.AttachedFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem x:Uid="Remove" Text="Remove" Click="RemoveAgendaSlot"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.AttachedFlyout>
                                 <TextBlock
                                         Text="{Binding Title}"
                                         TextWrapping="WrapWholeWords"
@@ -144,11 +155,22 @@
                 <ListView
                     ItemsSource="{Binding friday}"
                     IsItemClickEnabled="True"
-                    ItemClick="scheduleByRoomItem_Click"
+                    ItemClick="SlotItem_Click"
                     ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="19,14.5,0,9.5">
+                                <interactivity:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Holding">
+                                        <actions:OpenMenuFlyoutAction />
+                                    </core:EventTriggerBehavior>
+                                </interactivity:Interaction.Behaviors>
+
+                                <FlyoutBase.AttachedFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem x:Uid="Remove" Text="Remove" Click="RemoveAgendaSlot"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.AttachedFlyout>
                                 <TextBlock
                                         Text="{Binding Title}"
                                         TextWrapping="WrapWholeWords"
@@ -189,6 +211,7 @@
         <CommandBar>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="ScheduleByHourButton" x:Name="ScheduleByHourButton" Label="Planning par heure" Click="GoToScheduleByHourPage"/>
+                <AppBarButton x:Uid="ScheduleByRoomButton" x:Name="ScheduleByRoomButton" Label="Planning par salle" Click="GoToScheduleByRoomPage"/>
                 <AppBarButton x:Uid="AboutButton" x:Name="AboutButton" Label="A propos" Click="GoToAboutPage"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>

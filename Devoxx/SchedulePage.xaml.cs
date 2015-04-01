@@ -160,5 +160,11 @@ namespace Devoxx
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
         }
+
+        private void AddAgendaSlot(object sender, RoutedEventArgs e)
+        {
+            var slot = (e.OriginalSource as FrameworkElement).DataContext;
+            AgendaDataSource.AddSlotAsync(slot as Slot);
+        }
     }
 }
