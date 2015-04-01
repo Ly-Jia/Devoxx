@@ -32,7 +32,13 @@
                     ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,0,0,9.5">
+                            <StackPanel Margin="0,0,0,9.5" Holding="Slot_Holding">
+                                <FlyoutBase.AttachedFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="Add" />
+                                    </MenuFlyout>
+                                </FlyoutBase.AttachedFlyout>
+
                                 <TextBlock
                                     Text="{Binding Title}"
                                     TextWrapping="WrapWholeWords"

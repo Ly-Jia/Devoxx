@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Devoxx.Model;
 
 namespace Devoxx.Data
@@ -12,8 +13,7 @@ namespace Devoxx.Data
     public class AgendaDataSource
     {
         private StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-        private const string dataFolder = "Data";
-        private const string agendaFile = "Agenda.json";
+        private Uri agendaUri = new Uri("ms-appadata:Agenda.json");
 
         private static AgendaDataSource _agendaDataSource = new AgendaDataSource();
 
@@ -53,25 +53,30 @@ namespace Devoxx.Data
 
         private async void SaveAsync(IEnumerable<Slot> slots)
         {
-            var folder = await localFolder.CreateFolderAsync(dataFolder, CreationCollisionOption.OpenIfExists);
-            var file = await folder.CreateFileAsync(agendaFile, CreationCollisionOption.OpenIfExists);
+            var file = await localFolder.CreateFileAsync("Agenda.json", CreationCollisionOption.ReplaceExisting);
 
-            using (var s = await file.OpenStreamForWriteAsync())
-            {
-                var textBytes = Utils.SerializeAgenda(slots);
-                s.Write(textBytes, 0, textBytes.Length);
-            }
+                var text = Utils.SerializeAgenda(slots);
+                await FileIO.WriteTextAsync(file, text, UnicodeEncoding.Utf8);
         }
 
         private async Task LoadAsync()
         {
             if (localFolder != null)
             {
-                var folder = await localFolder.GetFolderAsync(dataFolder);
-                var stream = await folder.OpenStreamForReadAsync(agendaFile);
+                try
+                {
+                    var file = await localFolder.GetFileAsync("Agenda.json");
+                    //var storageFile = await StorageFile.GetFileFromApplicationUriAsync(agendaUri);
+                    var agendaText = await FileIO.ReadTextAsync(file);
 
-                var slots = Utils.DeserializeAgenda(stream);
-                _agendaDataSource.agenda = slots;
+                    var slots = Utils.DeserializeAgenda(agendaText);
+                    _agendaDataSource.agenda = slots;
+                }
+                catch (Exception e)
+                {
+                    
+                }
+                
             }
         }
     }

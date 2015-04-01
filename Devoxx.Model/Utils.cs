@@ -17,7 +17,8 @@ namespace Devoxx.Model
             typeof (Talk),
             typeof (Room),
             typeof (Speaker),
-            typeof (Link)
+            typeof (Link),
+            typeof(IEnumerable<Slot>)
         };
 
         private static DataContractJsonSerializer agendaSerializer = new DataContractJsonSerializer(typeof (ObservableCollection<Slot>), types);
@@ -37,7 +38,7 @@ namespace Devoxx.Model
             return schedule;
         }
 
-        public static byte[] SerizalizeSchedule(Schedule schedule)
+        public static string SerizalizeSchedule(Schedule schedule)
         {
             using (var stream = new MemoryStream())
             {
@@ -46,13 +47,14 @@ namespace Devoxx.Model
             }
         }
 
-        public static ObservableCollection<Slot> DeserializeAgenda(Stream stream)
+        public static ObservableCollection<Slot> DeserializeAgenda(string agendaText)
         {
+            var stream = new MemoryStream(Encoding.Unicode.GetBytes(agendaText));
             var agenda = (ObservableCollection<Slot>) agendaSerializer.ReadObject(stream);
             return agenda;
         }
 
-        public static byte[] SerializeAgenda(IEnumerable<Slot> agenda)
+        public static string SerializeAgenda(IEnumerable<Slot> agenda)
         {
             using (var stream = new MemoryStream())
             {
@@ -61,11 +63,13 @@ namespace Devoxx.Model
             }
         }
 
-        private static byte[] StreamToByteArray(MemoryStream stream)
+        private static string StreamToByteArray(MemoryStream stream)
         {
+            stream.Position = 0;
             var streamReader = new StreamReader(stream);
             var text = streamReader.ReadToEnd();
-            return Encoding.Unicode.GetBytes(text);
+            return text;
+            //return Encoding.Unicode.GetBytes(text);
         }
 
         public static Index CreateIndex(Schedule schedule, Func<Slot, string> indexColumn)

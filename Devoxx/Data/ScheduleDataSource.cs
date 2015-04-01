@@ -14,6 +14,10 @@ namespace Devoxx.Data
    
     public sealed class ScheduleDataSource
     {
+        private Uri wednesdayUri = new Uri("ms-appx:///Data/Wednesday.json");
+        private Uri thursdayUri = new Uri("ms-appx:///Data/Thursday.json");
+        private Uri fridayUri = new Uri("ms-appx:///Data/Friday.json");
+
         public event EventHandler SchedulesLoaded;
         public bool IsLoaded = false;
 
@@ -64,7 +68,6 @@ namespace Devoxx.Data
         }
         public static async Task<Slot> GetSlotAsync(string uniqueId)
         {
-           
             // Simple linear search is acceptable for small data sets
             List<Slot> slots = _scheduleDataSource.Schedules.SelectMany(schedule => schedule.Slots).Distinct().ToList();
             var matches = slots.Where(slot => slot.Id == uniqueId).ToList();
@@ -88,10 +91,6 @@ namespace Devoxx.Data
 
         private async Task LoadAsync()
         {
-            Uri wednesdayUri = new Uri("ms-appx:///Data/Wednesday.json");
-            Uri thursdayUri = new Uri("ms-appx:///Data/Thursday.json");
-            Uri fridayUri = new Uri("ms-appx:///Data/Friday.json");
-
             var wednesdayJsonText = await FileIO.ReadTextAsync(await StorageFile.GetFileFromApplicationUriAsync(wednesdayUri));
             var thrusdayJsonText = await FileIO.ReadTextAsync(await StorageFile.GetFileFromApplicationUriAsync(thursdayUri));
             var fridayJsonText = await FileIO.ReadTextAsync(await StorageFile.GetFileFromApplicationUriAsync(fridayUri));
@@ -161,7 +160,5 @@ namespace Devoxx.Data
         {
             return s => s.FromTimeToTime;
         }
-
-
     }
 }
