@@ -45,7 +45,7 @@ namespace Devoxx.Data
             }
 
             if(_agendaDataSource.agenda != null)
-                return _agendaDataSource.agenda.Where(slot => slot.Day == day);
+                return _agendaDataSource.agenda.Where(slot => slot.Day == day).OrderBy(slot => slot.FromTimeToTime);
 
             return new List<Slot>();
         }
