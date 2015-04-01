@@ -101,18 +101,18 @@ namespace Devoxx.Data
             schedules.Add(Utils.DeserializeSchedule(fridayJsonText));          
         }
 
-        private void CreateIndexes()
+        private static void CreateIndexes()
         {
-            hoursIndex.Clear();
-            roomsIndex.Clear();
-            foreach (var schedule in schedules)
+            _scheduleDataSource.hoursIndex.Clear();
+            _scheduleDataSource.roomsIndex.Clear();
+            foreach (var schedule in _scheduleDataSource.schedules)
             {
-                hoursIndex.Add(Utils.CreateIndex(schedule, HourCriteria()));
-                roomsIndex.Add(Utils.CreateIndex(schedule, RoomCriteria()));
+                _scheduleDataSource.hoursIndex.Add(Utils.CreateIndex(schedule, HourCriteria()));
+                _scheduleDataSource.roomsIndex.Add(Utils.CreateIndex(schedule, RoomCriteria()));
             }
         }
 
-        private async Task RefreshAsync()
+        public static async Task RefreshAsync()
         {
             IEnumerable<string> pathes = new List<string>
                 {
@@ -121,7 +121,7 @@ namespace Devoxx.Data
                     "http://cfp.devoxx.fr/api/conferences/DevoxxFR2015/schedules/friday/"
                 };
             string jsonText;
-            schedules.Clear();
+            _scheduleDataSource.Schedules.Clear();
             using (var client = new HttpClient())
             {
                 foreach (var path in pathes)
@@ -129,7 +129,7 @@ namespace Devoxx.Data
                     var response = await client.GetAsync(path);
                     jsonText = await response.Content.ReadAsStringAsync();
                     var schedule = Utils.DeserializeSchedule(jsonText);
-                    schedules.Add(schedule);
+                    _scheduleDataSource.Schedules.Add(schedule);
                 }
             }
             CreateIndexes();
@@ -151,12 +151,12 @@ namespace Devoxx.Data
             return slots.Where(s => s.RoomName == room);
         }
 
-        private Func<Slot, string> RoomCriteria()
+        private static Func<Slot, string> RoomCriteria()
         {
             return s => s.RoomName;
         }
 
-        private Func<Slot, string> HourCriteria()
+        private static Func<Slot, string> HourCriteria()
         {
             return s => s.FromTimeToTime;
         }

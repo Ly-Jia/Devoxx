@@ -121,5 +121,14 @@ namespace Devoxx
             var slot = (e.OriginalSource as FrameworkElement).DataContext;
             AgendaDataSource.AddSlotAsync(slot as Slot);
         }
+
+        private async void UpdateSchedule(object sender, RoutedEventArgs e)
+        {
+            await ScheduleDataSource.RefreshAsync();
+            if (!Frame.Navigate(typeof(PivotPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
     }
 }

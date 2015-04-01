@@ -186,4 +186,7 @@
   <data name="Remove.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="RefreshButton.Label" xml:space="preserve">
+    <value>Get the latest schedule</value>
+  </data>
 </root>
