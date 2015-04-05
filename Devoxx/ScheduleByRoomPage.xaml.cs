@@ -163,9 +163,9 @@ namespace Devoxx
 
         #endregion
 
-        private void GoToAgendaPage(object sender, RoutedEventArgs e)
+        private void GoToFavouritesPage(object sender, RoutedEventArgs e)
         {
-            if (!Frame.Navigate(typeof(AgendaPage), e))
+            if (!Frame.Navigate(typeof(FavouritesPage), e))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }

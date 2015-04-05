@@ -105,7 +105,7 @@
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="ScheduleByHourButton" x:Name="ScheduleByHourButton" Label="Planning par heure" Click="GoToScheduleByHourPage"/>
                 <AppBarButton x:Uid="ScheduleByRoomButton" x:Name="ScheduleByRoomButton" Label="Planning par salle" Click="GoToScheduleByRoomPage"/>
-                <AppBarButton x:Uid="AgendaButton" x:Name="AgendaButton" Label="Agenda personnalisé" Click="GoToAgendaPage"/>
+                <AppBarButton x:Uid="favouritesButton" x:Name="FavouritesButton" Label="favourites personnalisé" Click="GoToFavouritesPage"/>
                 <AppBarButton x:Uid="AboutButton" x:Name="AboutButton" Label="A propos" Click="GoToAboutPage"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>

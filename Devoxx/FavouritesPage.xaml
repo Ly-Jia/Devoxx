@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Devoxx.AgendaPage"
+    x:Class="Devoxx.FavouritesPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
@@ -20,7 +20,7 @@
 
     <Grid>
         
-        <Pivot x:Uid="AgendaPivot" Title="Favoris" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Foreground="LimeGreen" >
+        <Pivot x:Uid="FavouritesPivot" Title="Favoris" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Foreground="LimeGreen" >
             <!--Pivot item one-->
             <PivotItem
                 x:Uid="PivotItem1"
@@ -44,7 +44,7 @@
 
                                 <FlyoutBase.AttachedFlyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem x:Uid="Remove" Text="Remove" Click="RemoveAgendaSlot"/>
+                                        <MenuFlyoutItem x:Uid="Remove" Text="Remove" Click="RemoveFavouritesSlot"/>
                                     </MenuFlyout>
                                 </FlyoutBase.AttachedFlyout>
                                 <TextBlock
@@ -106,7 +106,7 @@
 
                                 <FlyoutBase.AttachedFlyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem x:Uid="Remove" Text="Remove" Click="RemoveAgendaSlot"/>
+                                        <MenuFlyoutItem x:Uid="Remove" Text="Remove" Click="RemoveFavouritesSlot"/>
                                     </MenuFlyout>
                                 </FlyoutBase.AttachedFlyout>
                                 <TextBlock
@@ -168,7 +168,7 @@
 
                                 <FlyoutBase.AttachedFlyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem x:Uid="Remove" Text="Remove" Click="RemoveAgendaSlot"/>
+                                        <MenuFlyoutItem x:Uid="Remove" Text="Remove" Click="RemoveFavouritesSlot"/>
                                     </MenuFlyout>
                                 </FlyoutBase.AttachedFlyout>
                                 <TextBlock

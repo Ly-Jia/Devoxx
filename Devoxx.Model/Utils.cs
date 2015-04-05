@@ -21,7 +21,7 @@ namespace Devoxx.Model
             typeof(IEnumerable<Slot>)
         };
 
-        private static DataContractJsonSerializer agendaSerializer = new DataContractJsonSerializer(typeof (ObservableCollection<Slot>), types);
+        private static DataContractJsonSerializer favouritesSerializer = new DataContractJsonSerializer(typeof (ObservableCollection<Slot>), types);
         private static DataContractJsonSerializer scheduleSerializer = new DataContractJsonSerializer(typeof(Schedule), types);
 
         public static Schedule DeserializeSchedule(string sheduleText)
@@ -47,18 +47,18 @@ namespace Devoxx.Model
             }
         }
 
-        public static ObservableCollection<Slot> DeserializeAgenda(string agendaText)
+        public static ObservableCollection<Slot> DeserializeFavourites(string favouritesText)
         {
-            var stream = new MemoryStream(Encoding.Unicode.GetBytes(agendaText));
-            var agenda = (ObservableCollection<Slot>) agendaSerializer.ReadObject(stream);
-            return agenda;
+            var stream = new MemoryStream(Encoding.Unicode.GetBytes(favouritesText));
+            var favourites = (ObservableCollection<Slot>) favouritesSerializer.ReadObject(stream);
+            return favourites;
         }
 
-        public static string SerializeAgenda(IEnumerable<Slot> agenda)
+        public static string SerializeFavourites(IEnumerable<Slot> favourites)
         {
             using (var stream = new MemoryStream())
             {
-                agendaSerializer.WriteObject(stream, agenda);
+                favouritesSerializer.WriteObject(stream, favourites);
                 return StreamToByteArray(stream);
             }
         }

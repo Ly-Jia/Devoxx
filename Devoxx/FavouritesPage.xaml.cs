@@ -11,23 +11,26 @@ using Devoxx.Model;
 
 namespace Devoxx
 {
-    /// <summary>
-    /// A page that displays details for a single item within a group.
-    /// </summary>
-    public sealed partial class ItemPage : Page
+    public sealed partial class FavouritesPage : Page
     {
+        private const string FirstGroupName = "wednesday";
+        private const string SecondGroupName = "thursday";
+        private const string ThirdGroupName = "friday";
+
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
 
-        public ItemPage()
+        public FavouritesPage()
         {
             this.InitializeComponent();
+
+            this.NavigationCacheMode = NavigationCacheMode.Required;
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-        } 
+        }
 
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
@@ -46,46 +49,49 @@ namespace Devoxx
             get { return this.defaultViewModel; }
         }
 
-        /// <summary>
-        /// Populates the page with content passed during navigation. Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>.
-        /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session.  The state will be null the first time a page is visited.</param>
+        
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var slot = await ScheduleDataSource.GetSlotAsync((string)e.NavigationParameter);
-            this.DefaultViewModel["Slot"] = slot;
+
+            var favourites = await FavouritesDataSource.GetFavouritesByDayAsync(FirstGroupName);
+            this.DefaultViewModel[FirstGroupName] = favourites;
         }
 
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/>.</param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
+        private async void SecondPivot_Loaded(object sender, RoutedEventArgs e)
+        {
+            var favourites = await FavouritesDataSource.GetFavouritesByDayAsync(SecondGroupName);
+            this.DefaultViewModel[SecondGroupName] = favourites;
+        }
+
+        
+        private async void ThirdPivot_Loaded(object sender, RoutedEventArgs e)
+        {
+            var favourites = await FavouritesDataSource.GetFavouritesByDayAsync(ThirdGroupName);
+            this.DefaultViewModel[ThirdGroupName] = favourites;
+        }
+
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
             // TODO: Save the unique state of the page here.
         }
-        private void GoToScheduleByHourPage(object sender, RoutedEventArgs e)
+
+        
+        /// <summary>
+        /// Invoked when an item within a section is clicked.
+        /// </summary>
+        private void SlotItem_Click(object sender, ItemClickEventArgs e)
         {
-            if (!Frame.Navigate(typeof(ScheduleByHourPage), e))
+            var slot = ((Slot)e.ClickedItem);
+
+            if (!Frame.Navigate(typeof(ItemPage), slot.Id))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
         }
 
-        private void GoToScheduleByRoomPage(object sender, RoutedEventArgs e)
+        private void GoToScheduleByHourPage(object sender, RoutedEventArgs e)
         {
-            if (!Frame.Navigate(typeof(ScheduleByRoomPage), e))
+            if (!Frame.Navigate(typeof(ScheduleByHourPage), e))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
@@ -98,6 +104,7 @@ namespace Devoxx
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
         }
+
         #region NavigationHelper registration
 
         /// <summary>
@@ -125,14 +132,20 @@ namespace Devoxx
 
         #endregion
 
-        private void FavoriteAppBarButton_Click(object sender, RoutedEventArgs e)
+        private async void RemoveFavouritesSlot(object sender, RoutedEventArgs e)
         {
-            AgendaDataSource.AddSlotAsync((Slot)this.DefaultViewModel["Slot"]);
+            var slot = (e.OriginalSource as FrameworkElement).DataContext;
+            await FavouritesDataSource.DeleteSlotAsync(slot as Slot);
+
+            if (!Frame.Navigate(typeof(FavouritesPage), e))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
         }
 
-        private void GoToAgendaPage(object sender, RoutedEventArgs e)
+        private void GoToScheduleByRoomPage(object sender, RoutedEventArgs e)
         {
-            if (!Frame.Navigate(typeof(AgendaPage), e))
+            if (!Frame.Navigate(typeof(ScheduleByRoomPage), e))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }

@@ -17,7 +17,7 @@
 
     <Grid>
         
-        <Pivot x:Uid="ScheduleByRoomPivot" Title="Agenda par horaire" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Foreground="LimeGreen" >
+        <Pivot x:Uid="ScheduleByRoomPivot" Title="favourites par horaire" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Foreground="LimeGreen" >
             <!--Pivot item one-->
             <PivotItem
                 x:Uid="PivotItem1"
@@ -112,7 +112,7 @@
         <CommandBar>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="ScheduleByHourButton" x:Name="ScheduleByHourButton" Label="Planning par heure" Click="GoToScheduleByHourPage"/>
-                <AppBarButton x:Uid="AgendaButton" x:Name="AgendaButton" Label="Agenda personnalisé" Click="GoToAgendaPage"/>
+                <AppBarButton x:Uid="favouritesButton" x:Name="FavouritesButton" Label="Favoris" Click="GoToFavouritesPage"/>
                 <AppBarButton x:Uid="AboutButton" x:Name="AboutButton" Label="A propos" Click="GoToAboutPage"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>

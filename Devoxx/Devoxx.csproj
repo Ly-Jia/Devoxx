@@ -88,11 +88,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ItemPage.xaml">
+    <Page Include="SlotPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="AgendaPage.xaml">
+    <Page Include="FavouritesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -108,7 +108,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PivotPage.xaml">
+    <Page Include="SchedulesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,13 +124,13 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Data\AgendaDataSource.cs" />
+    <Compile Include="Data\FavouritesDataSource.cs" />
     <Compile Include="Data\ScheduleDataSource.cs" />
-    <Compile Include="ItemPage.xaml.cs">
-      <DependentUpon>ItemPage.xaml</DependentUpon>
+    <Compile Include="SlotPage.xaml.cs">
+      <DependentUpon>SlotPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AgendaPage.xaml.cs">
-      <DependentUpon>AgendaPage.xaml</DependentUpon>
+    <Compile Include="FavouritesPage.xaml.cs">
+      <DependentUpon>FavouritesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Actions\OpenMenuFlyoutAction.cs" />
     <Compile Include="ScheduleByRoomPage.xaml.cs">
@@ -142,8 +142,8 @@
     <Compile Include="ScheduleByHourPage.xaml.cs">
       <DependentUpon>ScheduleByHourPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PivotPage.xaml.cs">
-      <DependentUpon>PivotPage.xaml</DependentUpon>
+    <Compile Include="SchedulesPage.xaml.cs">
+      <DependentUpon>SchedulesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

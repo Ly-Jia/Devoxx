@@ -153,18 +153,18 @@ namespace Devoxx
 
         #endregion
 
-        private void GoToAgendaPage(object sender, RoutedEventArgs e)
+        private void GoToFavouritesPage(object sender, RoutedEventArgs e)
         {
-            if (!Frame.Navigate(typeof(AgendaPage), e))
+            if (!Frame.Navigate(typeof(FavouritesPage), e))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
         }
 
-        private void AddAgendaSlot(object sender, RoutedEventArgs e)
+        private void AddSlotToFavourites(object sender, RoutedEventArgs e)
         {
             var slot = (e.OriginalSource as FrameworkElement).DataContext;
-            AgendaDataSource.AddSlotAsync(slot as Slot);
+            FavouritesDataSource.AddSlotAsync(slot as Slot);
         }
     }
 }
