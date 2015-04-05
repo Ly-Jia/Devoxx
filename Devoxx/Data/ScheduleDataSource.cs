@@ -6,17 +6,20 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Windows.Storage;
 using Devoxx.Model;
+using UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding;
 
 namespace Devoxx.Data
 {
    
     public sealed class ScheduleDataSource
     {
-        private Uri wednesdayUri = new Uri("ms-appx:///Data/Wednesday.json");
-        private Uri thursdayUri = new Uri("ms-appx:///Data/Thursday.json");
-        private Uri fridayUri = new Uri("ms-appx:///Data/Friday.json");
+        private StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+        private static Uri wednesdayUri = new Uri("ms-appx:///Data/Wednesday.json");
+        private static Uri thursdayUri = new Uri("ms-appx:///Data/Thursday.json");
+        private static Uri fridayUri = new Uri("ms-appx:///Data/Friday.json");
 
         public event EventHandler SchedulesLoaded;
         public bool IsLoaded = false;
@@ -133,6 +136,7 @@ namespace Devoxx.Data
                 }
             }
             CreateIndexes();
+            SaveAsync();
         }
 
         public static IEnumerable<Slot> GetScheduleOfHourAsync(string day, string hour)
@@ -149,6 +153,20 @@ namespace Devoxx.Data
             var slots = schedule.Slots;
 
             return slots.Where(s => s.RoomName == room);
+        }
+
+        private static void SaveAsync()
+        {
+            SaveSchedule(wednesdayUri, "wednesday");
+            SaveSchedule(thursdayUri, "thursday");
+            SaveSchedule(fridayUri, "friday");
+        }
+
+        private static async Task SaveSchedule(Uri targetUri, string day)
+        {
+            var file = await StorageFile.GetFileFromApplicationUriAsync(targetUri);
+            var text = Utils.SerizalizeSchedule(_scheduleDataSource.schedules.FirstOrDefault(s => s.Day == day));
+            FileIO.WriteTextAsync(file, text, UnicodeEncoding.Utf8);
         }
 
         private static Func<Slot, string> RoomCriteria()
