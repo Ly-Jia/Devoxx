@@ -71,6 +71,13 @@
                                     CommonNavigationTransitionInfo.IsStaggerElement="True" 
                                     Style="{ThemeResource ListViewItemContentTextBlockStyle}"
                                     Margin="0,0,19,0"/>
+                                <TextBlock
+                                    Text="{Binding Speakers}"
+                                    TextWrapping="WrapWholeWords"
+                                    Pivot.SlideInAnimationGroup="2" 
+                                    CommonNavigationTransitionInfo.IsStaggerElement="True" 
+                                    Style="{ThemeResource ListViewItemContentTextBlockStyle}"
+                                    Margin="0,0,19,0"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -126,6 +133,13 @@
                                     CommonNavigationTransitionInfo.IsStaggerElement="True" 
                                     Style="{ThemeResource ListViewItemContentTextBlockStyle}"
                                     Margin="0,0,19,0"/>
+                                <TextBlock
+                                    Text="{Binding Speakers}"
+                                    TextWrapping="WrapWholeWords"
+                                    Pivot.SlideInAnimationGroup="2" 
+                                    CommonNavigationTransitionInfo.IsStaggerElement="True" 
+                                    Style="{ThemeResource ListViewItemContentTextBlockStyle}"
+                                    Margin="0,0,19,0"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -176,6 +190,13 @@
                                     Margin="0,0,19,0"/>
                                 <TextBlock
                                     Text="{Binding RoomName}"
+                                    TextWrapping="WrapWholeWords"
+                                    Pivot.SlideInAnimationGroup="2" 
+                                    CommonNavigationTransitionInfo.IsStaggerElement="True" 
+                                    Style="{ThemeResource ListViewItemContentTextBlockStyle}"
+                                    Margin="0,0,19,0"/>
+                                <TextBlock
+                                    Text="{Binding Speakers}"
                                     TextWrapping="WrapWholeWords"
                                     Pivot.SlideInAnimationGroup="2" 
                                     CommonNavigationTransitionInfo.IsStaggerElement="True" 

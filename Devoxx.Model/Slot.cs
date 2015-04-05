@@ -128,7 +128,6 @@ namespace Devoxx.Model
                 
                 if (Talk != null)
                 {
-                    speakers.Append("Présenté par ");
                     foreach (var speaker in Talk.Speakers)
                     {
                         speakers.Append(speaker.Name).Append(" ");
