@@ -21,8 +21,18 @@ namespace Devoxx.Data
             get { return this.agenda; }
         }
 
+        private AgendaDataSource()
+        {
+        
+        }
+
         public static async Task AddSlotAsync(Slot slot)
         {
+            if (!_agendaDataSource.agenda.Any())
+            {
+                await _agendaDataSource.LoadAsync();
+            }
+
             if (!_agendaDataSource.agenda.Contains(slot))
             {
                 _agendaDataSource.agenda.Add(slot);
@@ -53,8 +63,8 @@ namespace Devoxx.Data
         {
             var file = await localFolder.CreateFileAsync("Agenda.json", CreationCollisionOption.ReplaceExisting);
 
-                var text = Utils.SerializeAgenda(slots);
-                await FileIO.WriteTextAsync(file, text, UnicodeEncoding.Utf8);
+            var text = Utils.SerializeAgenda(slots);
+            await FileIO.WriteTextAsync(file, text, UnicodeEncoding.Utf8);
         }
 
         private async Task LoadAsync()
@@ -69,11 +79,10 @@ namespace Devoxx.Data
                     var slots = Utils.DeserializeAgenda(agendaText);
                     _agendaDataSource.agenda = slots;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    
+                    // ignored
                 }
-                
             }
         }
     }
